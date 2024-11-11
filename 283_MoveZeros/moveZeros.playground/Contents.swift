@@ -48,7 +48,7 @@ while @j < arr count - 1
 // 0(N)
 
 
-func moveZeroes(_ nums: inout [Int]) {
+func moveZeroesOption1(_ nums: inout [Int]) {
     guard nums.count > 1 else { return }
     var i = 0
     var j = 0
@@ -67,8 +67,62 @@ func moveZeroes(_ nums: inout [Int]) {
 }
 
 var arr = [0,1,0,3,12]
-moveZeroes(&arr)
+moveZeroesOption1(&arr)
 //arr = [0]
-//moveZeroes(&arr)
+//moveZeroesOption1(&arr)
 //arr = [1,2]
-//moveZeroes(&arr)
+//moveZeroesOption1(&arr)
+
+func moveZeroesOption2(_ nums: inout [Int]) {
+    guard nums.count > 1 else { return }
+    var i = 0
+    var j = 0
+    while j < nums.count {
+      while nums[j] == 0 && j < nums.count - 1 {
+            j += 1
+      }
+      
+      (nums[i],nums[j]) = (nums[j],nums[i])
+      j += 1
+      
+      while nums[i] != 0 && i < j && i < nums.count - 1 {
+          i += 1
+      }
+    }
+    print(nums)
+}
+
+arr = [0,1,0,3,12]
+moveZeroesOption2(&arr)
+//arr = [0]
+//moveZeroesOption2(&arr)
+//arr = [1,2]
+//moveZeroesOption2(&arr)
+
+
+func moveZeroesOption3(_ nums: inout [Int]) {
+    guard nums.count > 1 else { return }
+    var i = 0
+    var j = 1
+    while j < nums.count {
+      while nums[j] == 0 && j < nums.count - 1 {
+          j += 1
+      }
+      
+      while nums[i] != 0 && i < j && i < nums.count - 1 {
+          i += 1
+      }
+      
+      (nums[i],nums[j]) = (nums[j],nums[i])
+      j += 1
+      i += 1
+    }
+    print(nums)
+}
+
+arr = [0,1,0,3,12]
+moveZeroesOption3(&arr)
+//arr = [0]
+//moveZeroesOption3(&arr)
+//arr = [1,2]
+//moveZeroesOption3(&arr)
