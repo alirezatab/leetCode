@@ -92,3 +92,24 @@ console.log(isPowerOfTwoIterative(16))
 console.log(isPowerOfTwoIterative(3))
 console.log(isPowerOfTwoIterative(10))
 console.log(isPowerOfTwoIterative(-10))
+
+const isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit = (n) => {
+    return (n > 0) && (n & -n) == n
+}
+
+console.log(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(1));
+console.log(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(16))
+console.log(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(3))
+console.log(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(10))
+console.log(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(-10))
+
+
+const isPowerOfTwoTurnOffTheRightmostOneBit = (n) => {
+    return (n > 0) && (n & n-1) == 0
+}
+
+console.log(isPowerOfTwoTurnOffTheRightmostOneBit(1));
+console.log(isPowerOfTwoTurnOffTheRightmostOneBit(16))
+console.log(isPowerOfTwoTurnOffTheRightmostOneBit(3))
+console.log(isPowerOfTwoTurnOffTheRightmostOneBit(10))
+console.log(isPowerOfTwoTurnOffTheRightmostOneBit(-10))

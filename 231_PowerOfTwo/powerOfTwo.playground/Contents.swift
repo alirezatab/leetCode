@@ -1,3 +1,5 @@
+import UIKit
+
 /*
 2^4 = 16
 2^3 = 8
@@ -62,27 +64,20 @@ what are my base cases?
     return false
 */
 
-// below code work. commented and uncommented one
-func isPowerOfTwoRecrusive(_ n: Int) -> Bool {
-    /*
-    if n == 0 { return false }
-    if n == 1 { return true}
-    if n % 2 != 0 { return false }
-    return isPowerOfTwoRecrusive(n/2)
-     */
-    
-    if n == 0 { return false }
-    if n == 1 { return true}
-    return n % 2 == 0 && isPowerOfTwoRecrusive(n/2)
-}
+// Recrusively
+ func isPowerOfTwoRecuresively(_ n: Int) -> Bool {
+     if n == 0 { return false }
+     if n == 1 { return true}
+     if n % 2 != 0 { return false }
+     return isPowerOfTwoRecuresively(n/2)
+ }
 
-print(isPowerOfTwoRecrusive(1))
-print(isPowerOfTwoRecrusive(16))
-print(isPowerOfTwoRecrusive(3))
-print(isPowerOfTwoRecrusive(10))
-print(isPowerOfTwoRecrusive(-10))
+print(isPowerOfTwoRecuresively(16))
+print(isPowerOfTwoRecuresively(0))
+print(isPowerOfTwoRecuresively(3))
 
-func isPowerOfTwoIterative(_ n: Int) -> Bool {
+// Iteretavely
+func isPowerOfTwoIteretaveliy(_ n: Int) -> Bool {
     if n == 1 { return true }
     if n <= 0 { return false}
     if n % 2 != 0 { return false }
@@ -98,8 +93,23 @@ func isPowerOfTwoIterative(_ n: Int) -> Bool {
     return true
 }
 
-print(isPowerOfTwoIterative(1))
-print(isPowerOfTwoIterative(16))
-print(isPowerOfTwoIterative(3))
-print(isPowerOfTwoIterative(10))
-print(isPowerOfTwoIterative(-10))
+print(isPowerOfTwoIteretaveliy(16))
+print(isPowerOfTwoIteretaveliy(0))
+print(isPowerOfTwoIteretaveliy(3))
+
+func isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(_ n: Int) -> Bool {
+    return n > 0 && (n & -n) == n
+}
+
+print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(16))
+print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(0))
+print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(3))
+
+func isPowerOfTwoTurnOffTheRightmostOneBit(_ n: Int) -> Bool {
+
+    return n > 0 && (n & (n-1)) == 0
+}
+
+print(isPowerOfTwoTurnOffTheRightmostOneBit(16))
+print(isPowerOfTwoTurnOffTheRightmostOneBit(0))
+print(isPowerOfTwoTurnOffTheRightmostOneBit(3))

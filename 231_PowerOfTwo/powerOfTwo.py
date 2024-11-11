@@ -67,31 +67,49 @@ def isPowerOfTwoRecrusive(n):
         return False
     if n == 1:
         return True
-    return n % 2 == 0 and isPowerOfTwo(n/2)
+    return n % 2 == 0 and isPowerOfTwoRecrusive(n/2)
 
-print(isPowerOfTwoRecrusive(1))
-print(isPowerOfTwoRecrusive(16))
-print(isPowerOfTwoRecrusive(3))
-print(isPowerOfTwoRecrusive(10))
-print(isPowerOfTwoRecrusive(-10))
+# print(isPowerOfTwoRecrusive(1))
+# print(isPowerOfTwoRecrusive(16))
+# print(isPowerOfTwoRecrusive(3))
+# print(isPowerOfTwoRecrusive(10))
+# print(isPowerOfTwoRecrusive(-10))
 
 def isPowerOfTwoIterative(n):
     if n <= 0:
-            return False
-        if n == 1:
-            return True
-        if n % 2 != 0:
-            return False
-        
-        while n > 2:
-            if n % 2 == 0:
-                n /= 2
-            else:
-                return False
+        return False
+    if n == 1:
         return True
+    if n % 2 != 0:
+        return False
         
-print(isPowerOfTwoIterative(1))
-print(isPowerOfTwoIterative(16))
-print(isPowerOfTwoIterative(3))
-print(isPowerOfTwoIterative(10))
-print(isPowerOfTwoIterative(-10))
+    while n > 2:
+        if n % 2 == 0:
+           n /= 2
+        else:
+            return False
+    return True
+        
+# print(isPowerOfTwoIterative(1))
+# print(isPowerOfTwoIterative(16))
+# print(isPowerOfTwoIterative(3))
+# print(isPowerOfTwoIterative(10))
+# print(isPowerOfTwoIterative(-10))
+
+def isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(n):
+  return n > 0 and (n & -n) == n
+
+# print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(1))
+# print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(16))
+# print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(3))
+# print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(10))
+# print(isPowerOfTwoBitwiseOperatorsGetTheRightmostOneBit(-10))
+
+def isPowerOfTwoTurnOffTheRightmostOneBit(n):
+  return n > 0 and (n & n-1) == 0
+
+print(isPowerOfTwoTurnOffTheRightmostOneBit(1))
+print(isPowerOfTwoTurnOffTheRightmostOneBit(16))
+print(isPowerOfTwoTurnOffTheRightmostOneBit(3))
+print(isPowerOfTwoTurnOffTheRightmostOneBit(10))
+print(isPowerOfTwoTurnOffTheRightmostOneBit(-10))
