@@ -56,3 +56,66 @@ func getAverages2(_ nums: [Int], _ k: Int) -> [Int] {
 print(getAverages2([7,4,3,9,1,8,5,2,6], 3))
 print(getAverages2([100000], 0))
 print(getAverages2([8], 100000))
+
+
+func getAverages3(_ nums: [Int], _ k: Int) -> [Int] {
+  guard k > 0 else { return nums }
+  
+  let windowSize = (k * 2) + 1
+  var averages = Array(repeating: -1, count: nums.count)
+  
+  guard windowSize <= nums.count else { return averages }
+  
+  var windowSum = 0
+  for i in 0..<windowSize {
+    windowSum += nums[i]
+  }
+  
+  averages[k] = windowSum / windowSize
+  
+  for i in windowSize..<nums.count {
+    windowSum += nums[i] - nums[i - windowSize]
+    
+    averages[i - k] = Int(windowSum / windowSize)
+  }
+  
+  return averages
+}
+
+print(getAverages2([7,4,3,9,1,8,5,2,6], 3))
+print(getAverages2([100000], 0))
+print(getAverages2([8], 100000))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
