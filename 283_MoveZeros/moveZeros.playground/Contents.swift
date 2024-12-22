@@ -126,3 +126,24 @@ moveZeroesOption3(&arr)
 //moveZeroesOption3(&arr)
 //arr = [1,2]
 //moveZeroesOption3(&arr)
+
+// leetcode best optimal solution
+func moveZeroesOption4(_ nums: inout [Int]) {
+  var lastNonZeroFoundAt = 0
+  
+  // Move all non-zero elements to the front
+  for cur in 0..<nums.count {
+    if nums[cur] != 0 {
+      nums[lastNonZeroFoundAt] = nums[cur]
+      lastNonZeroFoundAt += 1
+    }
+  }
+  
+  // Fill the remaining positions with zeroes
+  for i in lastNonZeroFoundAt..<nums.count {
+    nums[i] = 0
+  }
+}
+
+arr = [0,1,0,3,12]
+moveZeroesOption4(&arr)
