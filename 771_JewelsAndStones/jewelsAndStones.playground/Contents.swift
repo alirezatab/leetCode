@@ -21,5 +21,6 @@ func numJewelsInStones(_ jewels: String, _ stones: String) -> Int {
 }
 
 print(numJewelsInStones("aA", "aAAbbbb"))
+print(numJewelsInStones("aAb", "aAAbbbb"))
 print(numJewelsInStones("z", "ZZ"))
 
