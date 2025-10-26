@@ -1,62 +1,82 @@
 import UIKit
 
+// Time Complexity: O(n + k log k)
+// Space Complexity: O(n + k)
+
+
+func frequencySortLongversion(_ s: String) -> String {
+  var result = ""
+  let frequencies = s.reduce(into: [Character: Int]()) { counter, char in
+    counter[char, default: 0] += 1
+  }
+  
+  let sortedFrequenies = frequencies.sorted { $0.value > $1.value }
+  
+  for (char, freq) in sortedFrequenies {
+    let str = String(repeating: char, count: freq)
+    result.append(str)
+  }
+  
+  return result
+}
+
+print(frequencySortLongversion("tree"))
+print(frequencySortLongversion("cccaaa"))
+print(frequencySortLongversion("Aabb"))
+
 /*
-    // uses dictionary to get frequencies -> k == Char, V == occurances
-    // uses dictionary to get frequencyToCharacters --> k == occurances, V == [char]
-    // then builds the final result string
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+ Time Complexity: O(n + k log k)
 
-    // Time: o(n) or o(n + u)
-    // space: o(n)
-    func frequencySort(_ s: String) -> String {
-        let frequencies = s.reduce(into: [Character: Int]()) { counts, char in
-            counts[char, default: 0] += 1
-        }
-        //print(frequencies)
+ Where:
+ n = length of input string s
+ k = number of unique characters in s
+ 
+ Breakdown:
+ 1. Building frequencies: O(n)
+  * Iterate through each character in the string once
+ 
+ 2. Sorting by frequency: O(k log k)
+  * Sort the dictionary entries (at most k unique characters)
+ 
+ 3. Mapping to strings: O(n)
+  * Create strings with total length n (sum of all frequencies = n)
+ 
+ 4. Joining strings: O(n)
+  * Concatenate all character strings into final result
+ 
+ Total: O(n + k log k + n + n) = O(n + k log k)
 
-        let frequencyToCharacters = frequencies.reduce(into: [Int: [Character]]()) { dict, pair in
-            let (char, freq) = pair
-            dict[freq, default: []].append(char)
-        }
-        print(frequencyToCharacters)
+ Since k ≤ n (you can't have more unique characters than total characters), worst case is O(n log n) when all characters are unique.
 
-        var resultComponents = [String]()
-        for i in stride(from: s.count, to: 0, by: -1) {
-            if let chars = frequencyToCharacters[i] {
-                for char in chars {
-                    resultComponents.append(String(repeating: char, count: i))
-                }
-            }
-        }
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+ 
+ Space Complexity: O(n + k)
 
-        return resultComponents.joined()
-    }
-    */
+ Breakdown:
+  1. Frequencies dictionary: O(k)
+  2. Sorted array of key-value pairs: O(k)
+  3. Mapped array of strings: O(n)
+    * Stores all characters in string form before joining
+  4.Final result string: O(n)
+ Total: O(k + k + n + n) = O(n + k)
+ */
 
-    // Time: o(n log n) or o(n + u log u)
-    // space: o(n)
-    func frequencySort(_ s: String) -> String {
-        // Count the occurrences of each character
-        let frequencies = s.reduce(into: [Character: Int]()) { counts, char in
-            counts[char, default: 0] += 1
-        }
-        // Make a list of the keys, sorted by frequency
-        let characters = frequencies.keys.sorted { return frequencies[$0]! > frequencies[$1]! }
+func frequencySort(_ s: String) -> String {
+  let frequencies = s.reduce(into: [Character: Int]()) { counter, char in
+    counter[char, default: 0] += 1
+  }
+  
+  return frequencies
+    .sorted { $0.value > $1.value }
+    .map { String(repeating: $0.key, count: $0.value) }
+    .joined()
+}
 
-        // Build the result string
-        // var resultComponents = [String]()
-        // for char in characters {
-        //     if let copies = frequencies[char] {
-        //         resultComponents.append(String(repeating: char, count: copies))
-        //     }
-        // }
-
-        // return resultComponents.joined()
-
-        return characters.compactMap {
-            guard let count = frequencies[$0] else { return nil }
-            return String(repeating: $0, count: count)
-        }.joined()
-    }
 
 print(frequencySort("tree"))
 print(frequencySort("cccaaa"))

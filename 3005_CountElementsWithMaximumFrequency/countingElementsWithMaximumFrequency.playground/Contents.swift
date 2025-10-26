@@ -54,3 +54,24 @@ func maxFrequencyElementsFunctional(_ nums: [Int]) -> Int {
 
 print(maxFrequencyElementsFunctional([1,2,2,3,1,4]))
 print(maxFrequencyElementsFunctional([1,2,3,4,5]))
+
+func maxFrequencyElementsFunctiona2(_ nums: [Int]) -> Int {
+  var maxFreq = 0
+  var result = 0
+  let freq = nums.reduce([Int: Int]()) { counterDic, num in
+    var tempCounterDic = counterDic
+    tempCounterDic[num, default: 0] += 1
+    maxFreq = max(maxFreq, tempCounterDic[num]!)
+    return tempCounterDic
+  }
+  
+  // for (num, count) in freq where count == maxFreq {
+  //     result += count
+  // }
+  
+  // return result
+  return freq.values.filter { $0 == maxFreq }.reduce(0, +)
+}
+
+print(maxFrequencyElementsFunctiona2([1,2,2,3,1,4]))
+print(maxFrequencyElementsFunctiona2([1,2,3,4,5]))

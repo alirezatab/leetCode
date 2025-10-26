@@ -30,6 +30,14 @@ print(lengthOfLongestSubstring("abcabcbb"))
 print(lengthOfLongestSubstring("bbbbb"))
 print(lengthOfLongestSubstring("pwwkew"))
 
+// O(n^2) cause
+/*
+In Swift, String uses Unicode-compliant indexing, which means:
+
+Each s.index(s.startIndex, offsetBy: left) call walks through the string from the beginning
+As left increases, this becomes increasingly expensive
+Overall complexity becomes O(n²) in the worst case
+*/
 // This can be solved using a hashMap. maybe try that again which is more optimized way
 func lengthOfLongestSubstringSet(_ s: String) -> Int {
   var set = Set<Character>()
@@ -53,7 +61,55 @@ func lengthOfLongestSubstringSet(_ s: String) -> Int {
   return maxLength
 }
 
+// O(n^2) cause
+/*
+In Swift, String uses Unicode-compliant indexing, which means:
+
+Each s.index(s.startIndex, offsetBy: left) call walks through the string from the beginning
+As left increases, this becomes increasingly expensive
+Overall complexity becomes O(n²) in the worst case
+*/
+func lengthOfLongestSubstringSet3(_ s: String) -> Int {
+    var left = 0
+    var maxLength = 0
+    var set = Set<Character>()
+
+    for (right, character) in s.enumerated() {
+        while left < right && set.contains(character) {
+            set.remove(s[s.index(s.startIndex, offsetBy: left)])
+            left += 1
+        }
+
+        set.insert(character)
+        maxLength = max(maxLength, right - left + 1)
+    }
+    
+    return maxLength
+}
+
 print(lengthOfLongestSubstringSet("abcabcbb"))
 print(lengthOfLongestSubstringSet("bbbbb"))
 print(lengthOfLongestSubstringSet("pwwkew"))
 
+func lengthOfLongestSubstringSet2(_ s: String) -> Int {
+    var left = 0
+    var maxLength = 0
+    var set = Set<Character>()
+    let sArray = Array(s)
+
+    for (right, character) in sArray.enumerated() {
+        while left < right && set.contains(character) {
+            set.remove(sArray[left])
+            left += 1
+        }
+
+        set.insert(character)
+        maxLength = max(maxLength, right - left + 1)
+    }
+    
+    return maxLength
+}
+
+print(lengthOfLongestSubstringSet2("abcabcbb"))
+print(lengthOfLongestSubstringSet2("bbbbb"))
+print(lengthOfLongestSubstringSet2("pwwkew"))

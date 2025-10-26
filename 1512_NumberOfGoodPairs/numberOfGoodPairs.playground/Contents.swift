@@ -27,6 +27,7 @@ func numIdenticalPairs(_ nums: [Int]) -> Int {
   var numGoodPairs = 0
   var freqCounter = [Int: Int]()
   
+  /*
   for num in nums {
     if let freq =  freqCounter[num] {
       numGoodPairs += freq
@@ -35,6 +36,28 @@ func numIdenticalPairs(_ nums: [Int]) -> Int {
       freqCounter[num] = 1
     }
   }
+   */
+  
+  /*
+  for num in nums {
+    if let freq = freqCounter[num] {
+      numGoodPairs += freq
+      freqCounter[num, default: 0] += 1
+    } else {
+      freqCounter[num, default: 0] += 1
+    }
+  }
+   */
+  
+  for num in nums {
+    if let freq = freqCounter[num] {
+      numGoodPairs += freq
+    }
+    
+    freqCounter[num, default: 0] += 1
+  }
+  
+  
   return numGoodPairs
 }
 
