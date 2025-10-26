@@ -51,3 +51,20 @@ func largestUniqueNumber(_ nums: [Int]) -> Int {
 
 print(largestUniqueNumber([5,7,3,9,4,9,8,3,1]))
 print(largestUniqueNumber([9,9,8,8]))
+
+// Done in a differenct way
+func largestUniqueNumber(_ nums: [Int]) -> Int {
+  var freqCounter = [Int: Int]()
+  var maxNum = -1
+  for num in nums {
+    freqCounter[num, default: 0] += 1
+  }
+  
+  for (key, value) in freqCounter {
+    if value == 1 {
+      maxNum = max(maxNum, key)
+    }
+  }
+  
+  return maxNum
+}
