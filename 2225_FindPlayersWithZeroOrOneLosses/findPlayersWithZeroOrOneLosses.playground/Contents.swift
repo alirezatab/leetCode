@@ -87,3 +87,119 @@ print(findWinners(
   [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]])
 )
 print(findWinners([[2,3],[1,3],[5,4],[6,4]]))
+
+
+/*
+ matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+
+lossCounter = {1:0, 3: 2, 2:0, 6:2, 5:1, 7:1, 4:1, 8:1, 9:2, 10: 0}
+
+noLoss = []
+oneLoss = []
+if key is zero, add to the list
+    [1,2,10] ==> no loss
+    [5,7,4,8] ==> one loss
+
+the sort each of the arrays
+and return in array of arrays
+
+using countig
+create an array with the size of array +1 and init with -1
+matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+  0 1
+[[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+go through the mathces, and map the winner and loser to the array
+    if winner aka (match[0]) as index == -1 {
+        make that index = 0
+          0 1
+        [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+        [-1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+    }
+
+    if loser aks (match[1]) as index == -1 {
+        make the value at that index = 1
+            
+        [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+        [-1, 0, -1, 1, -1, -1, -1, -1, -1, -1, -1]
+    } else {
+        inc value at that index by 1
+    }
+}
+
+winnerArry
+loserArray
+for loop counter
+    if == 0
+        append to winnerArray
+    else if == 1
+        append to oneLoserArr
+
+return [winnerArr, LoserArr]
+*/
+/*
+class Solution {
+    func findWinners(_ matches: [[Int]]) -> [[Int]] {
+        var lossCounter = [Int: Int]()
+        var zeroLoss = [Int]()
+        var oneLoss = [Int]()
+        
+        for match in matches {
+            lossCounter[match[0], default: 0] += 0
+            lossCounter[match[1], default: 0] += 1
+        }
+        
+        for (key, value) in lossCounter {
+            if value == 0 {
+                zeroLoss.append(key)
+            } else if value == 1 {
+                oneLoss.append(key)
+            }
+        }
+        
+        return [zeroLoss.sorted(), oneLoss.sorted()]
+    }
+}
+*/
+
+class Solution {
+    func findWinners(_ matches: [[Int]]) -> [[Int]] {
+        var zeroLoss = [Int]()
+        var oneLoss = [Int]()
+        var counter = Array(repeating: -1, count: matches.count + 1)
+    
+        for match in matches {
+            let winner = match[0]
+            let loser = match[1]
+            if counter[winner] == -1 {
+                counter[winner] == 0
+            }
+            
+            print(counter)
+            
+            if counter[loser] == -1 {
+                counter[loser] = 0
+            } else {
+                counter[loser] += 1
+            }
+            print(counter)
+        }
+        
+
+        
+        var noLossArr = [Int]()
+        var oneLossArr = [Int]()
+        
+        for (i, count) in counter.enumerated() {
+            if count == 0 {
+                noLossArr.append(i)
+            } else if count == 1 {
+                oneLossArr.append(i)
+            }
+        }
+        
+        return [noLossArr, oneLossArr]
+    }
+}
