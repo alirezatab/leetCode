@@ -88,11 +88,6 @@ This is a personal learning project, so contributions aren't needed — but feel
 
 ## 📬 Contact
 
-Questions? Ideas? Reach out via GitHub or [alirezatab.com](https://alirezatab.com/) (if public).
+Questions? Ideas? Reach out via GitHub or [alirezatab.com](https://alirezatab.com/).
 
 ---
-
-## 🧠 Keep grinding.
-
-> *“Consistency > intensity.”*  
-> Every problem solved is a step toward mastery. Let's go 🚀
