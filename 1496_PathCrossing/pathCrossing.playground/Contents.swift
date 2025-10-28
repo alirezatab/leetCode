@@ -1,5 +1,45 @@
 import UIKit
 
+/*
+     x, y
+N = (0, 1)
+E = (1, 0)
+S = (0, -1)
+W = (-1, 0)
+
+ *  (0,1), 1,1 1,0 --. Add the ponts to visisted
+"NES"
+
+if already in visited, then return tru
+
+
+at the end, return false
+var visisted = { (0,0) } --> tuple
+var x = 0
+var y = 0
+
+for loop through point in paths
+    switch point:
+        case N
+            y += 1
+        case E
+           x += 1
+        case W
+            x -= 1
+        case S
+            y -= 1
+        default break
+
+    point = (x, y)
+
+    if set.contains(point)
+        return trun
+    else
+        set.insert(point)
+
+return false
+*/
+
 struct Point: Hashable {
   let x: Int
   let y: Int
