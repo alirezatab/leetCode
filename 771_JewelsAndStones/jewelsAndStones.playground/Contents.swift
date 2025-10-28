@@ -24,3 +24,19 @@ print(numJewelsInStones("aA", "aAAbbbb"))
 print(numJewelsInStones("aAb", "aAAbbbb"))
 print(numJewelsInStones("z", "ZZ"))
 
+func numJewelsInStonesShorter(_ jewels: String, _ stones: String) -> Int {
+  var set = Set(jewels)
+  var result = 0
+  
+  for stone in stones {
+    if set.contains(stone) {
+      result += 1
+    }
+  }
+  
+  return result
+}
+
+print(numJewelsInStonesShorter("aA", "aAAbbbb"))
+print(numJewelsInStonesShorter("aAb", "aAAbbbb"))
+print(numJewelsInStonesShorter("z", "ZZ"))
