@@ -49,3 +49,64 @@ func pairSum(_ head: ListNode?) -> Int {
   
   return maxSum
 }
+
+/*
+var max
+    find the mid of list
+    from mid, reverse the list
+    then add start ot end and compare ot max
+    inc start, dec end
+     s
+     f
+    [5,4,2,1]
+       s
+         f
+    [5,4,2,1]
+         s
+             f
+    [5,4,2,1]
+
+         p s
+         ^ nn
+    [5,4,2 1]
+
+         p  s
+        \     nn
+    [5,4,2<-1]
+            p
+    var pre = nil
+    whiel slow !- nil
+        let nextNode = slow.next
+        slow.next = prev
+        prev = slow
+        slow = nextNode
+*/
+
+// Time: o(n)
+// Space: o(1)
+func pairSumTry2(_ head: ListNode?) -> Int {
+  var maxSum = 0
+  var slow = head
+  var fast = head
+  while fast != nil && fast?.next != nil {
+    slow = slow?.next
+    fast = fast?.next?.next
+  }
+  
+  var prev: ListNode?
+  while slow != nil {
+    let nextNode = slow?.next
+    slow?.next = prev
+    prev = slow
+    slow = nextNode
+  }
+  
+  var start = head
+  while prev != nil {
+    maxSum = max(maxSum, start!.val + prev!.val)
+    start = start?.next
+    prev = prev?.next
+  }
+  
+  return maxSum
+}
