@@ -35,3 +35,24 @@ func maxDepth(_ root: TreeNode?) -> Int {
   return max(left, right) + 1
 }
 
+func maxDepthIterative(_ root: TreeNode?) -> Int {
+  guard root != nil else { return 0 }
+  var answer = 0
+  var stack = [(root, 1)]
+  
+  while !stack.isEmpty {
+    let (node, depth) = stack.removeLast()
+    answer = max(answer, depth)
+    
+    if node?.left != nil {
+      stack.append((node!.left, depth + 1))
+    }
+    
+    if node?.right != nil {
+      stack.append((node!.right, depth + 1))
+    }
+  }
+  
+  return answer
+}
+
