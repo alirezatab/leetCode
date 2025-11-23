@@ -12,6 +12,36 @@ public class TreeNode {
   }
 }
 
+
+// Time: O(h)
+// h = height of the BST
+// Balanced tree: h = log n → O(log n)
+// Worst-case (skewed tree): h = n → O(n)
+
+// Space: O(1)
+func closestValue(_ root: TreeNode?, _ target: Double) -> Int {
+  var current = root
+  var closest = root!.val // assuming non-null per problem constraints
+  
+  while current != nil {
+    let val = current!.val
+    let currentDiff = abs(Double(val) - target)
+    let closestDiff = abs(Double(closest) - target)
+    
+    if currentDiff < closestDiff || (currentDiff == closestDiff && val < closest)  {
+      closest = val
+    }
+    
+    if target < Double(val) {
+      current = current?.left
+    } else {
+      current = current?.right
+    }
+  }
+  
+  return closest
+}
+
 /*
     first do dfs of in order of BST -> so you get [1,2,3,4,5]
     then go from begining to end
