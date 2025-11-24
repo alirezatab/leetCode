@@ -127,3 +127,70 @@ func findCircleNumNotSpaceOptimize(_ isConnected: [[Int]]) -> Int {
 
 print(findCircleNumNotSpaceOptimize([[1,1,0],[1,1,0],[0,0,1]]))
 print(findCircleNumNotSpaceOptimize([[1,0,0],[0,1,0],[0,0,1]]))
+
+/*
+    
+    [1,1,0] at 0, add 0 t0 seen, loop througgh the neighbors and if [i][neighbor] == 1 --> [1,1,0]
+    [1,1,0]
+    [0,0,1]
+
+    seen = {0, 1,}
+    [1,1,0]
+    access connected[i][j] == 1, and not in seen {
+        dfs(j)
+    }
+
+    dfs(0)
+        seen = {0}
+         *
+        [1,1,0]
+           *
+        [1,1,0]
+    dfs(1)
+        seen = {0,1}
+         *
+        [1,1,0]
+           *
+        [1,1,0]
+
+    dfs(i)
+        seen.insert(i)
+        for j in 0..<connected[i].count {
+            if val @ j == "1" and not in seen {
+                dfs(j)
+            }
+        }
+
+    loop thorugh go from 0 < n
+        if no in seen
+            answ += 1
+            dfs(i)
+*/
+// Time: o(n^2)
+// Space: o(n)
+func findCircleNum(_ isConnected: [[Int]]) -> Int {
+    var seen = Set<Int>()
+    let n = isConnected.count
+    var ans = 0
+
+    func dfs(_ i: Int) {
+        seen.insert(i)
+        for j in 0..<n {
+            if isConnected[i][j] == 1 && !seen.contains(j) {
+                dfs(j)
+            }
+        }
+    }
+
+    for i in 0..<n {
+        if !seen.contains(i) {
+            ans += 1
+            dfs(i)
+        }
+    }
+
+    return ans
+}
+
+print(findCircleNum([[1,1,0],[1,1,0],[0,0,1]]))
+print(findCircleNum([[1,0,0],[0,1,0],[0,0,1]]))
