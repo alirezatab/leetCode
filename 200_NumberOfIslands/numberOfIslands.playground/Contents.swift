@@ -65,3 +65,45 @@ func numIslands(_ grid: [[Character]]) -> Int {
 
 print(numIslands([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]))
 print(numIslands([["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]))
+
+func numIslandsCopyGridFaster(_ grid: [[Character]]) -> Int {
+  let rowCount = grid.count
+  let colCount = grid[0].count
+  var copyGrid = grid
+  
+  func isValid(_ row: Int, _ col: Int) -> Bool {
+    row >= 0 && row < rowCount && col >= 0 && col < colCount && copyGrid[row][col] == "1"
+  }
+  
+  let directions = [(row: 1, col: 0), (row: 0, col: 1), (row: -1, col: 0), (row: 0, col: -1)]
+  
+  func dfs(_ row: Int, _ col: Int) {
+    copyGrid[row][col] = "0"
+    
+    for direction in directions {
+      let newRow = row + direction.row
+      let newCol = col + direction.col
+      if isValid(newRow, newCol) {
+        dfs(newRow, newCol)
+      }
+    }
+  }
+  
+  // traverse matrix
+  var ans = 0
+  for row in 0..<rowCount {
+    for col in 0..<colCount {
+      if copyGrid[row][col] == "1" {
+        copyGrid[row][col] = "0"
+        ans += 1
+        dfs(row, col)
+      }
+    }
+  }
+  
+  return ans
+}
+
+
+print(numIslandsCopyGridFaster([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]))
+print(numIslandsCopyGridFaster([["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]))
