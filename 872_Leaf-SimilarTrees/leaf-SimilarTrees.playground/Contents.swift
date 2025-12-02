@@ -21,8 +21,32 @@ other wise keep traversing
  */
  // Time: o(n + m)
  // Space: o(n + m)
+func leafSimilarTrueDFSWay(_ root1: TreeNode?, _ root2: TreeNode?) -> Bool {
+    func dfs(_ node: TreeNode?) -> [Int] {
+        guard node != nil else { return [ ] }
+        // we have a leaf node
+        if node!.left == nil && node!.right == nil {
+            return [node!.val]
+        }
+        return dfs(node?.left) + dfs(node?.right)
+    }
 
-func leafSimilar(_ root1: TreeNode?, _ root2: TreeNode?) -> Bool {
+    var tree1Leaves = dfs(root1)
+    var tree2Leaves = dfs(root2)
+
+    guard tree1Leaves.count == tree2Leaves.count else { return false }
+
+    for (leaf1, leaf2) in zip(tree1Leaves, tree2Leaves) {
+        if leaf1 != leaf2 {
+            return false
+        }
+    }
+
+    return true
+}
+
+
+func leafSimilarMyWay(_ root1: TreeNode?, _ root2: TreeNode?) -> Bool {
   
   var tree1Leaves = [Int]()
   var tree2Leaves = [Int]()
